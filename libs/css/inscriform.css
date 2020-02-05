@@ -1,0 +1,16 @@
+#skin{
+    margin-left: 41%;
+    color: red;
+    font-size: 30px;
+    text-decoration: underline;
+}
+.under{
+    text-decoration: underline;
+    font-size: 20px;
+}
+#alert{
+    font-size: 30px;
+    color: red;
+    text-decoration: underline;
+    margin-left: 30%;
+}
