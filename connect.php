@@ -75,7 +75,7 @@ while($data = $req->fetchObject()){
         <td> <?=$data->name ?> </td>
         <td> <?= $data->description ?> </td>
         <td> <?= $data->price ?> </td>
-        <td><img src="libs/img/<?=$data->image?>" alt="image"></td>
+        <td><img class="short" src="libs/img/<?=$data->image?>" alt="image"></td>
         <td> <?= $data->nomcat ?></td>
         <td>
             <a href="detail.php?id=<?=$data->id?>"><button type="button" class="btn btn-info mr-1 mb-2">Details</button></a>

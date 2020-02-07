@@ -60,7 +60,7 @@ $dataprod = $req2->fetch();
 <div class="container bg-light">
 
     <div class="mt-5  text-center"><u><h1>Modification du produit N°<?=$var?></h1></u></div>
-    <form method="post" action="taffmodif.php">
+    <form method="post" action="taffmodif.php" enctype="multipart/form-data">
         <div class="form-group">
             <input type="text" class="form-control" value="<?=$var?>" name="id" hidden>
         </div>
@@ -96,10 +96,12 @@ $dataprod = $req2->fetch();
 
         </div>
         <div class="form-group">
-            <p>image:</p>
-            <input type="text" class="form-control" name="image"  value="<?=$dataprod["image"]?>">
+            <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+            <!-- Le nom de l'élément input détermine le nom dans le tableau $_FILES -->
+            Envoyez ce fichier : <input name="userfile" type="file"  />
         </div>
-        <div><button type="submit" class="btn btn-primary btn-lg btn-block">Modifier</button>
+        <div><button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">Modifier</button>
             <a href="connect.php"><button type="button" class="btn btn-danger btn-lg btn-block mt-1">Annuler</button></a></div>
     </form>
 </div>

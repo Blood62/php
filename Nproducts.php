@@ -34,7 +34,7 @@ $req->execute();
 <div class="container bg-light">
 
 	<div class="mt-2 text-center"><u><h1>Ajout d'un produit</h1></u></div>
-	<form method="post" action="taffNprod.php">
+	<form method="post" action="taffNprod.php" enctype="multipart/form-data">
 		<div class="form-group">
 			<p>Nom du produit:</p>
 			<input type="text" class="form-control" name="nom" >
@@ -61,10 +61,12 @@ $req->execute();
 
 			</select>
 		</div>
-		<div class="form-group">
-			<p>image:</p>
-			<input type="text" class="form-control" name="image" >
-		</div>
+        <div class="form-group">
+            <!-- MAX_FILE_SIZE doit précéder le champ input de type file -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+            <!-- Le nom de l'élément input détermine le nom dans le tableau $_FILES -->
+            Envoyez ce fichier : <input name="userfile" type="file"  />
+        </div>
 		<div><button type="submit" class="btn btn-primary btn-lg btn-block">Ajouter</button>
 			<a href="connect.php"><button type="button" class="btn btn-danger btn-lg btn-block mt-1">Annuler</button></a></div>
 	</form>

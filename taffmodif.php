@@ -18,9 +18,33 @@ $descri=verifstring($_POST["desc"]);
 $name=verifstring($_POST["nom"]);
 $prix=verifint($_POST["Prix"]);
 $idprod=verifint($_POST["id"]);
-$img=verifstring($_POST["image"]);
+$img=$_FILES['userfile'];
 $cate=verifint($_POST["cat"]);
 
+var_dump($img);
+
+if (isset($_POST['submit'])) {
+	//var_dump($_FILES);
+
+	$dest = ('libs/img/' . $_FILES['userfile']['name']);
+	$fichierupType = ($_FILES['userfile']['type']);
+	$fichierup = ($_FILES['userfile']['tmp_name']);
+//var_dump($_FILES);
+	if ($fichierupType == preg_match('@image/@', verifstring($fichierup))) {
+		//var_dump(mime_content_type($fichierup));
+		//var_dump($fichierupType);echo "/////";var_dump(mime_content_type($_FILES['userfile']['tmp_name']));
+		if ($fichierupType == mime_content_type($fichierup)) {
+			//var_dump($_FILES['userfile']['tmp_name']);
+			//var_dump($dest);
+			$test = move_uploaded_file($_FILES['userfile']['tmp_name'], $dest);
+
+			//var_dump($test);
+		}
+
+	}
+}
+
+if ($test==true){
 $sql="UPDATE products as popo SET popo.name=:nom,popo.description=:descri,popo.price=:prix,popo.category_id=:cat,popo.image=:img WHERE popo.id=:idprod;";
 
 $req=$db->prepare($sql);
@@ -28,22 +52,36 @@ $req->bindParam(":idprod",$idprod);
 $req->bindParam(":descri",$descri);
 $req->bindParam(":prix",$prix);
 $req->bindParam(":cat",$cate);
-$req->bindParam(":img",$img);
+$req->bindParam(":img",$img['name']);
 $req->bindParam(":nom",$name);
 $req->execute();
+}else{
+	$sql="UPDATE products as popo SET popo.name=:nom,popo.description=:descri,popo.price=:prix,popo.category_id=:cat WHERE popo.id=:idprod;";
+
+	$req=$db->prepare($sql);
+	$req->bindParam(":idprod",$idprod);
+	$req->bindParam(":descri",$descri);
+	$req->bindParam(":prix",$prix);
+	$req->bindParam(":cat",$cate);
+
+	$req->bindParam(":nom",$name);
+	$req->execute();
+
+}
+
 
 
 
 
 function verifstring($mot){
-	if (isset($mot)) {
-		if(!empty($mot)){
+	//if (isset($mot)) {
+		//if(!empty($mot)){
 			if(!is_int($mot)){
 				//return intval((htmlspecialchars(trim(($mot)))));
 				return htmlspecialchars(trim($mot));
 			}
-		}
-	}
+		//}
+	//}
 };
 
 
