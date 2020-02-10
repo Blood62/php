@@ -42,7 +42,8 @@ $req->execute();
 	?><a href="deco.php"><button type="button" class="mt-5 btn btn-outline-danger  ml-3 mb-3">Deconnexion</button></a><?php } ?>
 
 
-    <a href="forminscription.php"><button type="button" class="mt-5 btn btn-outline-primary  ml-3 mb-3">Inscription</button></a>
+	<?php if ($_SESSION==NULL)
+	{?><a href="forminscription.php"><button type="button" class="mt-5 btn btn-outline-primary  ml-3 mb-3">Inscription</button></a><?php } ?>
 
 	<?php if ($_SESSION==NULL)
 	{?><a href="formconnect.php"><button type="button" class="mt-5 btn btn-outline-success  ml-3 mb-3">Connexion</button></a><?php } ?>
